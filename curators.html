@@ -1,0 +1,127 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/js-url/1.8.4/url.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+	<script src="https://platform.twitter.com/widgets.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet" type="text/css">
+	<title>Curators</title>
+</head>
+<body>
+<!--{{#if currentUser}}
+		{{> home}}
+	{{else}}
+		{{> landing}}
+	{{/if}}
+	{{> modal}} -->
+</body>
+
+<template name="/">test</template>
+
+<!-- CURATORS LIST TEMPLATES -->
+<template name="following">
+	<div id="overlay-curator-list">
+		<div id="overlay-curator-list-container">
+			<div class="title">Today</div>
+			<div class="row">
+				{{#each list}}
+					<div class="col-md-3">
+						<div class="curator-container">
+							<img class="inline img-circle" src="{{services.twitter.profile_image_url}}">
+							<a href="/post/{{getLastPostId _id}}">{{profile.name}}</a>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="divider list"></div>
+				</div>
+			</div>
+			<div class="title">Suggestions</div>
+			<div class="row">
+				{{#each list}}
+					<div class="col-md-3">
+						<div class="curator-container">
+							<img class="inline img-circle" src="{{services.twitter.profile_image_url}}">
+							<div>{{services.twitter.screenName}}</div>
+							<button class="btn btn-info">Follow</button>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<!-- TEMPLATES -->
+<template name="home">
+	<!-- <div id="background" style="background-image: url('/{{currentUser._id}}.png')"></div>
+	<div id="overlay"></div> -->
+	{{> following}}
+	<div id="home">
+			<header>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 no-padding">
+							<div id="header-container">
+								{{#if currentUser}}
+									<img class="inline img-circle" src="{{currentUser.services.twitter.profile_image_url}}">
+									<div id="header-user-info" class="inline middle">{{currentUser.profile.name}}</div>
+									<div id="header-control-container" class="inline right">
+										<i class="right inline fa fa-sign-out fa-2x"></i>
+										<i class="right inline fa fa-paper-plane fa-2x" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+										<i class="right inline fa fa-bell fa-2x"></i>
+									</div>
+								{{else}}
+									<button class="btn btn-info btn-lg"><i class="fa fa-twitter fa-2x"></i> Sign in with Twitter</button>
+								{{/if}}
+							</div>
+						</div>
+						<!-- <div class="col-md-12">
+							<div class="divider"></div>
+						</div> -->
+					</div>
+				</div>
+			</header>
+			{{> post}}
+			<footer>
+				<div class="row">
+					<div class="col-md-12"></div>
+				</div>
+			</footer>
+	</div>
+	{{> modal}}
+</template>
+
+<!-- TEMPLATES -->
+<template name="post">
+	<div class="container-fluid">
+		<div class="row">
+			<div id="post" class="col-md-12">
+				<img class="inline img-circle" src="{{currentUser.services.twitter.profile_image_url}}">
+				<div id="user-info" class="inline middle">{{currentUser.profile.name}}'s last post</div>
+				<!-- <h2 class="white">Last post</h2> -->
+				{{lastPostUrl}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<!-- MODAL TEMPLATE -->
+<template name="modal">
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myLargeModalLabel">Post!</h4>
+				</div>
+				<div class="modal-body"><input type="url" id="url-input" class="form-control input-large" placeholder="Link"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="url-post" class="btn btn-primary">Post</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
