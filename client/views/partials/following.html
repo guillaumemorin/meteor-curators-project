@@ -1,0 +1,34 @@
+<template name="following">
+	<div id="overlay-curator-list">
+		<div id="overlay-curator-list-container">
+			<div class="title">Today</div>
+			<div class="row">
+				{{#each list}}
+					<div class="col-md-3">
+						<div class="curator-container">
+							<img class="inline img-circle" src="{{services.twitter.profile_image_url}}">
+							<a href="/post/{{getLastPostId _id}}">{{profile.name}}</a>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="divider list"></div>
+				</div>
+			</div>
+			<div class="title">Suggestions</div>
+			<div class="row">
+				{{#each list}}
+					<div class="col-md-3">
+						<div class="curator-container">
+							<img class="inline img-circle" src="{{services.twitter.profile_image_url}}">
+							<div>{{services.twitter.screenName}}</div>
+							<button class="btn btn-info">Follow</button>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</template>

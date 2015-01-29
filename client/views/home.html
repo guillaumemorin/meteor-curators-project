@@ -1,0 +1,33 @@
+<template name="home">
+	{{> following}}
+	<div id="home">
+			<header>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 no-padding">
+							<div id="header-container">
+								{{#if currentUser}}
+									<img class="inline img-circle" src="{{currentUser.services.twitter.profile_image_url}}">
+									<div id="header-user-info" class="inline middle">{{currentUser.profile.name}}</div>
+									<div id="header-control-container" class="inline right">
+										<i class="right inline fa fa-sign-out fa-2x"></i>
+										<i class="right inline fa fa-paper-plane fa-2x" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+										<i class="right inline fa fa-bell fa-2x"></i>
+									</div>
+								{{else}}
+									<button class="btn btn-info btn-lg"><i class="fa fa-twitter fa-2x"></i> Sign in with Twitter</button>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			{{> post}}
+			<footer>
+				<div class="row">
+					<div class="col-md-12"></div>
+				</div>
+			</footer>
+	</div>
+	{{> modal}}
+</template>
